@@ -5,10 +5,10 @@ POST http://localhost:9999/specialUsers-api/register-special-user
 Content-Type: application/json
 
 {
-    "specialUsers_id":4,
-    "first_name":"suresh",
-    "last_name":"raina",
-    "email_id":"raina@wal.com",
+    "specialUsers_id":6,
+    "first_name":"emp6",
+    "last_name":"emp6",
+    "email_id":"emp6@wal.com",
     "password":"123"
 }
 
@@ -18,7 +18,7 @@ POST http://localhost:9999/specialUsers-api/special-user-login
 Content-Type: application/json
 
 {
-    "email_id":"virat@wal1.com",
+    "email_id":"emp3@wal.com",
     "password":"123"
 }
 
@@ -78,11 +78,11 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbF9pZCI6ImFye
 
 ### Get all Projects  ###########################################################
 GET http://localhost:9999/admin-api/get-projects
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbF9pZCI6ImRob25pQHdhbC5jb20iLCJ1c2VyX3JvbGUiOiJBZG1pbiIsImlhdCI6MTY3ODg1MjE0MiwiZXhwIjoxNjc4ODU4MTQyfQ.AecSPaZKuoO_zGXsjB6DmqevVoyyrIwCI_q2DMSS9oA
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbF9pZCI6ImRob25pQHdhbC5jb20iLCJ1c2VyX3JvbGUiOiJBZG1pbiIsImlhdCI6MTY3OTM5OTk0NSwiZXhwIjoxNjc5NDA1OTQ1fQ.IaPiCVW7I9bE2Wt-McoD5Z2CJ8XcmDPzQHgEElKOYvU
 
 ### Get project details by project ID #########################################################
 GET http://localhost:9999/admin-api/get-projects-by-id/1
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbF9pZCI6ImRob25pQHdhbC5jb20iLCJ1c2VyX3JvbGUiOiJBZG1pbiIsImlhdCI6MTY3ODg1MjE0MiwiZXhwIjoxNjc4ODU4MTQyfQ.AecSPaZKuoO_zGXsjB6DmqevVoyyrIwCI_q2DMSS9oA
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbF9pZCI6ImVtcDRAd2FsLmNvbSIsInVzZXJfcm9sZSI6IkFkbWluIiwiaWF0IjoxNjgwMDkyMzU0LCJleHAiOjE2ODAxNzg3NTR9.hqn2UZwhef2OpVWgdKIndgDrc9AmdQ_IUctlWZvckX0
 
 ### Create a new project #############################################################
 POST http://localhost:9999/admin-api/create-project
@@ -131,7 +131,7 @@ Content-Type: application/json
     "customer_exposed_status":"No",
     "allocation_type":"Permanent",
     "project_id":1,
-    "emp_id":2
+    "specialUser_id":2
 }
 
 ### Update employee details in the team #################################################################
@@ -181,7 +181,7 @@ Content-Type: application/json
     "quality_status":"Green",
     "waiting_for_client_inputs":"Yes",
     "project_id":1,
-    "emp_id":2
+    "projectManager_id":2
 }
 
 ### Update project updates #################################################################
@@ -197,20 +197,20 @@ Content-Type: application/json
     "quality_status":"Green",
     "waiting_for_client_inputs":"Yes",
     "project_id":1,
-    "emp_id":3
+    "projectManager_id":3
 }
 
 ### Delete project updates #################################################################
-DELETE http://localhost:9999/projectManager-api/delete-project-updates/1
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbF9pZCI6InZpcmF0QHdhbDEuY29tIiwidXNlcl9yb2xlIjoiUHJvamVjdCBNYW5hZ2VyIiwiaWF0IjoxNjc4ODUyNjc1LCJleHAiOjE2Nzg4NTg2NzV9.domtILbpUyHSz0T-09H14JWox24AmxdJoDRrSCm5DUM
+DELETE http://localhost:9999/projectManager-api/delete-project-update/7
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbF9pZCI6ImVtcDNAd2FsLmNvbSIsInVzZXJfcm9sZSI6IlByb2plY3QgTWFuYWdlciIsImlhdCI6MTY4MDQ5Njc3MSwiZXhwIjoxNjgwNTgzMTcxfQ._w34jTDHVbXcmWWwtfsWYD0rfUtPyCF3R7_5uEUklUI
 
 ### Create Project Concern #################################################################
 POST http://localhost:9999/projectManager-api/create-project-concern
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbF9pZCI6InZpcmF0QHdhbDEuY29tIiwidXNlcl9yb2xlIjoiUHJvamVjdCBNYW5hZ2VyIiwiaWF0IjoxNjc4ODUyNjc1LCJleHAiOjE2Nzg4NTg2NzV9.domtILbpUyHSz0T-09H14JWox24AmxdJoDRrSCm5DUM
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbF9pZCI6ImVtcDNAd2FsLmNvbSIsInVzZXJfcm9sZSI6IlByb2plY3QgTWFuYWdlciIsImlhdCI6MTY4MDE1NTY2NSwiZXhwIjoxNjgwMjQyMDY1fQ.-2Pu_QkbTUgEh1FBNbFQhXlTc4sqI_yU5kLcfo4AqQI
 Content-Type: application/json
 
 {
-    "project_name":"1234",
+    "project_name":"12345",
     "concern_description":"It has a small concern",
     "concern_raised_by":"Virat",
     "concern_raised_date":"2023-12-12",
@@ -219,7 +219,7 @@ Content-Type: application/json
     "concern_status":"Raised",
     "concern_mitigated_date":"2023-12-12",
     "project_id":1,
-    "emp_id":2
+    "projectManager_id":3
 }
 
 ### Update Project Concern #################################################################
@@ -237,9 +237,17 @@ Content-Type: application/json
     "concern_status":"4222",
     "concern_mitigated_date":"2023-12-12",
     "project_id":1,
-    "emp_id":1
+    "projectManager_id":1
 }
 
-### Update Project Concern #################################################################
-DELETE http://localhost:9999/projectManager-api/delete-project-concern/:id
+### DELETE Project Concern #################################################################
+DELETE http://localhost:9999/projectManager-api/delete-project-concern/2
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbF9pZCI6InZpcmF0QHdhbDEuY29tIiwidXNlcl9yb2xlIjoiUHJvamVjdCBNYW5hZ2VyIiwiaWF0IjoxNjc4ODUyNjc1LCJleHAiOjE2Nzg4NTg2NzV9.domtILbpUyHSz0T-09H14JWox24AmxdJoDRrSCm5DUM
+
+### All Updates by project manager ID #################################################################
+GET http://localhost:9999/projectManager-api/get-all-updates/1
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbF9pZCI6InZpcmF0QHdhbDEuY29tIiwidXNlcl9yb2xlIjoiUHJvamVjdCBNYW5hZ2VyIiwiaWF0IjoxNjc4ODUyNjc1LCJleHAiOjE2Nzg4NTg2NzV9.domtILbpUyHSz0T-09H14JWox24AmxdJoDRrSCm5DUM
+
+### All Concerns by project manager ID #################################################################
+GET http://localhost:9999/projectManager-api/get-all-concerns/1
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbF9pZCI6InZpcmF0QHdhbDEuY29tIiwidXNlcl9yb2xlIjoiUHJvamVjdCBNYW5hZ2VyIiwiaWF0IjoxNjc4ODUyNjc1LCJleHAiOjE2Nzg4NTg2NzV9.domtILbpUyHSz0T-09H14JWox24AmxdJoDRrSCm5DUM

@@ -68,7 +68,7 @@ const getProjectDetailsById = expressAsyncHandler(async(request,response)=>{
     })
     let teamSize=0;
     projectResult.team_compositions.forEach((team)=>{
-        if(team.billing_status == "billed") teamSize++;
+        if(team.billing_status == "Billed") teamSize++;
     })
     response.send({Message:`Details of project_id ${project_Id}`, projectFitness:projectFitness,concernsIndicator:concernsIndicator,teamSize:teamSize,payload:projectResult})
 })

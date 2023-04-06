@@ -45,7 +45,7 @@ const deleteSpecialUsers = expressAsyncHandler(async(request,response)=>{
     await sequelize.query("DELETE FROM special_users WHERE specialUsers_id=?",{
         replacements:[specialUsers_id]
     });
-    response.send({Message:"Special User has been deleted"})
+    response.send({Message:"Special User has been deleted",Id:specialUsers_id})
 })
 
 let send = {

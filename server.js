@@ -3,6 +3,10 @@ const exp = require('express')
 
 //call function 
 const app = exp()
+const cors = require('cors');
+app.use(cors());
+// const helmet = require('helmet')
+// app.use(helmet())
 
 //configure dotenv
 require('dotenv').config
@@ -54,3 +58,6 @@ app.use('*',(request,response,next)=>{
 app.use((error,request,response,next)=>{
     response.send({Message:"An error has occcured",Error:error.message})
 })
+
+
+// module.exports = app;

@@ -77,7 +77,7 @@ const LoginSpecialUser = expressAsyncHandler(async(request,response)=>{
             })  
             let result = specialUsersDetails[0]     
             // creating and encoding a jwt token based on the user data with secret key which will expire in given time
-            let signedToken = jwt.sign({email_id:email_id,user_role:result.user_role},process.env.SECRET_KEY,{expiresIn:6000})
+            let signedToken = jwt.sign({email_id:email_id,user_role:result.user_role},process.env.SECRET_KEY,{expiresIn:'1d'})
             // Deleting the password
             delete row[0].password
             // Sending a response with a text message along with token and user data

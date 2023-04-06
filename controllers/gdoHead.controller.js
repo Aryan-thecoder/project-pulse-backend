@@ -43,11 +43,11 @@ const getProjectDetailsById = expressAsyncHandler(async(request,response)=>{
     let projectFitness = projectResult.project_fitness_indicator;
     let concernsIndicator = 0;
     projectResult.project_concerns.forEach((concern)=>{
-        if (concern.concern_status == "Raised") concernsIndicator++;
+        if (concern.concern_status === "Raised") concernsIndicator++;
     })
     let teamSize=0;
     projectResult.team_compositions.forEach((team)=>{
-        if(team.billing_status == "billed") teamSize++;
+        if(team.billing_status === "Billed") teamSize++;
     })
     response.send({Message:`Details of project_id ${project_Id}`, projectFitness:projectFitness,concernsIndicator:concernsIndicator,teamSize:teamSize,payload:projectResult})
 })

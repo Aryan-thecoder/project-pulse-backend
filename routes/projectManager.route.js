@@ -11,10 +11,11 @@ const {
     createProjectUpdates,
     updateProjectUpdates,
     deleteProjectUpdates,
-    RiaseProjectConcern,
+    raiseProjectConcern,
     updateProjectConcerns,
-    deleteProjectConcerns
-
+    deleteProjectConcerns,
+    getAllUpdates,
+    getAllConcerns
 } = require("../controllers/projectManager.controller")
 
 // create projectManagerApp express application
@@ -37,13 +38,19 @@ projectManagerApp.put('/update-project-updates/:id',verifyProjectManagerToken,up
 projectManagerApp.delete('/delete-project-update/:id',verifyProjectManagerToken,deleteProjectUpdates)
 
 // Route to POST project concerns
-projectManagerApp.post('/create-project-concern',verifyProjectManagerToken,RiaseProjectConcern)
+projectManagerApp.post('/create-project-concern',verifyProjectManagerToken,raiseProjectConcern)
 
 // Route to UPDATE project concerns
 projectManagerApp.put('/update-project-concern/:id',verifyProjectManagerToken,updateProjectConcerns)
 
 // Route to DELETE project concerns
 projectManagerApp.delete('/delete-project-concern/:id',verifyProjectManagerToken,deleteProjectConcerns)
+
+// Route to GET all updates
+projectManagerApp.get('/get-all-updates/:projectManagerId',verifyProjectManagerToken,getAllUpdates)
+
+// Route to GET all concerns
+projectManagerApp.get('/get-all-concerns/:projectManagerId',verifyProjectManagerToken,getAllConcerns)
 
 // exports
 module.exports = projectManagerApp

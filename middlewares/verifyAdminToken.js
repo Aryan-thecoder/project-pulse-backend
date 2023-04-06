@@ -25,7 +25,7 @@ const verifyAdminToken=(request,response,next)=>{
             }
         }
         catch{
-            response.send({Message:"Session expired. Please re-login to continue"})
+            response.status(401).send({Message:"Session expired. Please re-login to continue"})
         }
     }
 }

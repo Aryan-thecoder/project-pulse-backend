@@ -12,5 +12,5 @@ const sequelize = new Sequelize(
     }
 )
 
-// deafult export sequelize
+// default export sequelize
 module.exports = sequelize

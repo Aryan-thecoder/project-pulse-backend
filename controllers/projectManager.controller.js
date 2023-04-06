@@ -26,13 +26,13 @@ const {Employees} = require("../models/employees.model")
 const nodemailer = require("nodemailer")
 
 // one to many association between SpecialUsers and TeamComposition
-SpecialUsers.TeamComposition = SpecialUsers.hasMany(TeamComposition,{foreignKey:{name:"specialUser_id"},onDelete:"cascade",onUpdate:"cascade"})
+Employees.TeamComposition = Employees.hasMany(TeamComposition,{foreignKey:{name:"emp_id"},onDelete:"cascade",onUpdate:"cascade"})
 
 // one to many association between SpecialUsers and ProjectUpdates
-SpecialUsers.ProjectUpdates = SpecialUsers.hasMany(ProjectUpdates,{foreignKey:{name:"specialUser_id"},onDelete:"cascade",onUpdate:"cascade"})
+SpecialUsers.ProjectUpdates = SpecialUsers.hasMany(ProjectUpdates,{foreignKey:{name:"projectManager_id"},onDelete:"cascade",onUpdate:"cascade"})
 
 // one to many association between SpecialUsers and ProjectConcerns
-SpecialUsers.ProjectConcerns = SpecialUsers.hasMany(ProjectConcerns,{foreignKey:{name:"specialUser_id"},onDelete:"cascade",onUpdate:"cascade"})
+SpecialUsers.ProjectConcerns = SpecialUsers.hasMany(ProjectConcerns,{foreignKey:{name:"projectManager_id"},onDelete:"cascade",onUpdate:"cascade"})
 
 // get all projects
 const getAllProjects = expressAsyncHandler(async(request,response)=>{
@@ -71,7 +71,7 @@ const getProjectDetailsById = expressAsyncHandler(async(request,response)=>{
     })
     let teamSize=0;
     projectResult.team_compositions.forEach((team)=>{
-        if(team.billing_status == "billed") teamSize++;
+        if(team.billing_status == "Billed") teamSize++;
     })
     response.send({Message:`Details of project_id ${project_Id}`, projectFitness:projectFitness,concernsIndicator:concernsIndicator,teamSize:teamSize,payload:projectResult})
 })
@@ -93,7 +93,7 @@ const updateProjectUpdates = expressAsyncHandler(async(request,response)=>{
 const deleteProjectUpdates = expressAsyncHandler(async(request,response)=>{
     let id = request.params.id;
     await ProjectUpdates.destroy({where: {id: id}})
-    response.send({Message:"Project Update is deleted"})
+    response.send({Message:"Project Update is deleted",Id:id})
 })
 
 // create transporter
@@ -106,12 +106,12 @@ const transporter = nodemailer.createTransport({
 });
 
 // raising concern and trigger email
-const RiaseProjectConcern = expressAsyncHandler(async(request,response)=>{
+const raiseProjectConcern = expressAsyncHandler(async(request,response)=>{
     await ProjectConcerns.create(request.body)
     let mailOptions = {
         from: "aryan.subscription17@gmail.com",
         to: "aryan.subscription17@gmail.com",
-        subject: `Project concern is raised for project ${request.body.project_id} by ${request.body.specialUser_id}`,
+        subject: `Project concern is raised for Project Id : ${request.body.project_id} by Project Manager Id : ${request.body.projectManager_id}`,
         text: `A project concern is raised!
         Concern Description: ${request.body.concern_description}
         severity: ${request.body.concern_severity}`
@@ -120,22 +120,56 @@ const RiaseProjectConcern = expressAsyncHandler(async(request,response)=>{
         if(error){console.log("Error", error)}
         else{console.log("Email is sent", info.messageId)}
     });
-    response.send({ message: "Project Concern Raised" });
+    response.send({ message: "Project Concern Raised",Id:request.body.concern_description});
 })
 
 // update project concern
 const updateProjectConcerns = expressAsyncHandler(async(request,response)=>{
     let id = request.params.id;
     await ProjectConcerns.update(request.body,{where: {id: id}})
-    response.send({Message:"Project Concern is updated"})
+    response.send({Message:"Project Concern is updated",Id:request.body})
 })
 
 // delete project concern
 const deleteProjectConcerns = expressAsyncHandler(async(request,response)=>{
     let id = request.params.id;
     await ProjectConcerns.destroy({where: {id: id}})
-    response.send({Message:"Project Concern is deleted"})
+    response.send({Message:"Project Concern is deleted",Id:id})
 })
+
+// get all updates
+const getAllUpdates = expressAsyncHandler(async(request,response)=>{
+    let project_manager_id = request.params.projectManagerId
+    let [updates] = await sequelize.query("SELECT * FROM project_updates WHERE projectManager_id=?",{
+        replacements:[project_manager_id]
+    })
+    if(updates[0]!==undefined)
+    {
+        response.status(201).send({Message:"All Updates",payload:updates})
+    }
+    else{
+        response.status(201).send({Message:"No Updates Found"})
+    }
+})
+
+// get all concerns
+const getAllConcerns = expressAsyncHandler(async(request,response)=>{
+    let project_manager_id = request.params.projectManagerId
+    let [concerns] = await sequelize.query("SELECT * FROM project_concerns WHERE projectManager_id=?",{
+        replacements:[project_manager_id]
+    })
+    if(concerns[0]!==undefined)
+    {
+        response.status(201).send({Message:"All Concerns",payload:concerns})
+    }
+    else{
+        response.status(201).send({Message:"No Concerns Found"})
+    }
+})
+
+
+
+
 
 let send ={ 
     getAllProjects,
@@ -143,9 +177,11 @@ let send ={
     createProjectUpdates,
     updateProjectUpdates,
     deleteProjectUpdates,
-    RiaseProjectConcern,
+    raiseProjectConcern,
     updateProjectConcerns,
-    deleteProjectConcerns
+    deleteProjectConcerns,
+    getAllUpdates,
+    getAllConcerns
 }
 
 // export
